@@ -1,5 +1,4 @@
 CarrierWave.configure do |config|
-  permissions 0777
   config.cache_dir = File.join(Rails.root, 'tmp', 'uploads')
 
   case Rails.env.to_sym
