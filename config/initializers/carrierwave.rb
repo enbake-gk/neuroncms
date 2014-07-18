@@ -17,9 +17,7 @@ CarrierWave.configure do |config|
     :aws_secret_access_key  => "qwX9pSUr8vD+CGHIP1w4tYEpWV6dsK3gSkdneY/V" 
   }
   config.fog_directory  = "com.neuronicgames.neuroncms/content"                  
-  config.fog_public     = false                                   
-  config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}  
-  config.fog_authenticated_url_expiration = 604800
+
 
   else
     # settings for the local filesystem
