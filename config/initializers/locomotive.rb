@@ -3,7 +3,7 @@ Locomotive.configure do |config|
   # A single locomotiveCMS instance can serve one single site or many.
   # If you want to run many different websites, you will have to specify
   # your own domain name (ex: locomotivehosting.com).
-  #
+
   # Ex:
 
   config.multi_sites do |multi_sites|
