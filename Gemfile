@@ -28,7 +28,6 @@ gem 'locomotive_cms', '~> 2.4.1', :require => 'locomotive/engine'
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
