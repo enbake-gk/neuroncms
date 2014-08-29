@@ -5,10 +5,10 @@ class SearchController < Locomotive::Api::BaseController
 		column = params[:column]
 		value = params[:value]
 		
-		unless column.present
+		unless column.present?
 			column = 'name'
 		end
-		
+
 		begin
 		@Locomotive_Model = Locomotive::ContentType.where({ name: /^.*#{model}.*$/i } ).first  
 		    if @Locomotive_Model.present?
