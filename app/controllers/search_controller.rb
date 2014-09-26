@@ -22,6 +22,4 @@ class SearchController < Locomotive::Api::BaseController
 	     format.json { render json: @entries  }
 	    end
 	end
-
-
 end
