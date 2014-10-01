@@ -22,4 +22,54 @@ class SearchController < Locomotive::Api::BaseController
 	     format.json { render json: @entries  }
 	    end
 	end
+
+	def nested
+
+		if no param find.all
+		else
+			[find.where]
+
+		end
+
+		for each record
+			for key value
+				if key is an array
+					asso = ce.where(slug in [value])
+					arr[key] = asso
+				end
+			end
+		end
+
+		if no param return arr
+		else retnr arr[0]		
+
+
+
+		@ruby_result = JSON.parse(@result)
+       
+        @info = Locomotive::ContentEntry.where(:_slue => "book").first
+        abort @info
+
+        tag_detail_list = []
+        @get_tags = @ruby_result.map{|x| x["tags"]}
+        @get_tags.each do |get_tag|
+      	
+       	get_tag.each do |tag_detail|
+
+       	# get_tag_details = Locomotive::ContentEntry.where({ text: /^.*#{tag_detail}.*$/i } )
+
+       	# abort get_tag_details.to_json
+       		# if count = 2
+       		# puts tag_detail
+       		# tag_detail_list << tag_detail
+       		# abort tag_detail_list
+       		# end
+       		# count = count + 1
+       	end
+       end
+
+	end
+
+
 end
+
