@@ -1,7 +1,7 @@
 development:
   sessions:
     default:
-      database: acme_cms_development
+      database: app27978882
       hosts:
         - localhost:27017
   options:

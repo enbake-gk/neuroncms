@@ -8,8 +8,10 @@ AcmeCms::Application.routes.draw do
 
   # Sample of regular route:
   scope 'locomotive' do
-    scope 'api' do
+    scope 'api' do      
       get 'search' => 'search#search_by_name'
+      get ':model/entries/:id' => 'search#nested'
+      get ':model/entries' => 'search#nested'
     end
   end
   # Keep in mind you can assign values other than :controller and :action

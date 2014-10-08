@@ -23,53 +23,47 @@ class SearchController < Locomotive::Api::BaseController
 	    end
 	end
 
-	def nested
 
-		if no param find.all
-		else
-			[find.where]
+	def nested  
+		begin
+			@locomotive_model = Locomotive::ContentType.where({ name: /^.*#{params[:model]}.*$/i } ).first  
+		    if @locomotive_model.present?
+			    value_arr = []
+			    nested_model = {}
+			    final_object = []
 
+		    	if params[:id].present?
+		    	   @entries = Locomotive::ContentEntry.where({ :id => params[:id]})
+		        else
+		    	   @entries = @locomotive_model.entries
+		        end
+		  
+			    # iterate each entries
+				@entries.each do |entries|
+			            # iterate each entries with key and value 
+						entries.attributes.each_pair do |key, value|
+							# check if array is exists in entry
+								if value.is_a?(Array) && key.include?("ids")
+									   # itereate array with key and value
+					                   value.each_with_index  do |item, index|
+					                   	# Find each nested record
+						                   value_arr << Locomotive::ContentEntry.where({ :id => item})
+					                   end
+				                   nested_model.merge!({key.to_s => value_arr})
+							   end
+					    end	
+					    entries.attributes.merge!(nested_model) if nested_model.present?
+			            # final_object.merge!(entries.attributes)
+			            final_object << entries.attributes
+			    end
+		  	end 
+	    rescue
+		    final_object = 'Invalid Request! Please check and try again'
 		end
-
-		for each record
-			for key value
-				if key is an array
-					asso = ce.where(slug in [value])
-					arr[key] = asso
-				end
-			end
+		respond_to do |format|
+		       format.json { render json: final_object }
 		end
-
-		if no param return arr
-		else retnr arr[0]		
-
-
-
-		@ruby_result = JSON.parse(@result)
-       
-        @info = Locomotive::ContentEntry.where(:_slue => "book").first
-        abort @info
-
-        tag_detail_list = []
-        @get_tags = @ruby_result.map{|x| x["tags"]}
-        @get_tags.each do |get_tag|
-      	
-       	get_tag.each do |tag_detail|
-
-       	# get_tag_details = Locomotive::ContentEntry.where({ text: /^.*#{tag_detail}.*$/i } )
-
-       	# abort get_tag_details.to_json
-       		# if count = 2
-       		# puts tag_detail
-       		# tag_detail_list << tag_detail
-       		# abort tag_detail_list
-       		# end
-       		# count = count + 1
-       	end
-       end
-
 	end
-
 
 end
 
