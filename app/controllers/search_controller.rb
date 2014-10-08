@@ -25,7 +25,7 @@ class SearchController < Locomotive::Api::BaseController
 
 
 	def nested  
-		begin
+		# begin
 			@locomotive_model = Locomotive::ContentType.where({ name: /^.*#{params[:model]}.*$/i } ).first  
 		    if @locomotive_model.present?
 			    value_arr = []
@@ -37,29 +37,30 @@ class SearchController < Locomotive::Api::BaseController
 		        else
 		    	   @entries = @locomotive_model.entries
 		        end
-		  
 			    # iterate each entries
 				@entries.each do |entries|
 			            # iterate each entries with key and value 
 						entries.attributes.each_pair do |key, value|
 							# check if array is exists in entry
-								if value.is_a?(Array) && key.include?("ids")
+								if value.is_a?(Array) && key.include?("_ids")
+									 new_key = key.gsub('_ids', 's')
 									   # itereate array with key and value
 					                   value.each_with_index  do |item, index|
 					                   	# Find each nested record
 						                   value_arr << Locomotive::ContentEntry.where({ :id => item})
 					                   end
-				                   nested_model.merge!({key.to_s => value_arr})
+				                   nested_model.merge!({new_key.to_s => value_arr})
 							   end
 					    end	
+					    entries.attributes.delete("custom_fields_recipe")
 					    entries.attributes.merge!(nested_model) if nested_model.present?
 			            # final_object.merge!(entries.attributes)
 			            final_object << entries.attributes
 			    end
 		  	end 
-	    rescue
-		    final_object = 'Invalid Request! Please check and try again'
-		end
+	 #    rescue
+		#     final_object = 'Invalid Request! Please check and try again'
+		# end
 		respond_to do |format|
 		       format.json { render json: final_object }
 		end
