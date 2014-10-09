@@ -43,13 +43,16 @@ class SearchController < Locomotive::Api::BaseController
 						entries.attributes.each_pair do |key, value|
 							# check if array is exists in entry
 								if value.is_a?(Array) && key.include?("_ids")
-									 new_key = key.gsub('_ids', 's')
+
+									new_key = key.gsub('_ids', 's')
 									   # itereate array with key and value
-					                   value.each_with_index  do |item, index|
+					                    value.each_with_index  do |item, index|
 					                   	# Find each nested record
 						                   value_arr << Locomotive::ContentEntry.where({ :id => item})
-					                   end
-				                   nested_model.merge!({new_key.to_s => value_arr})
+						                   nested_model.merge!({new_key.to_s => value_arr})
+					                    end
+					                    value_arr =[]	
+				                    # nested_model.merge!({new_key.to_s => value_arr})
 							   end
 					    end	
 					    entries.attributes.delete("custom_fields_recipe")
