@@ -40,12 +40,10 @@ class SearchController < Locomotive::Api::BaseController
 			    # iterate each entries
 				@entries.each do |entries|
 
-
 			            # iterate each entries with key and value 
 						entries.attributes.each_pair do |key, value|
 							# check if array is exists in entry
 								if value.is_a?(Array) && key.include?("_ids")
-
 									new_key = key.gsub('_ids', 's')
 									   # itereate array with key and value
 					                    value.each_with_index  do |item, index|
