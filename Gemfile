@@ -19,7 +19,7 @@ end
 
 gem 'locomotive_cms', '~> 2.4.1', :require => 'locomotive/engine'
 
-
+gem 'debugger', group: [:development, :test]
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
