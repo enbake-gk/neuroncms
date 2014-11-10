@@ -33,4 +33,7 @@ gem 'locomotive_cms', '~> 2.4.1', :require => 'locomotive/engine'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+group :development do
+  gem 'debugger'
+end
+

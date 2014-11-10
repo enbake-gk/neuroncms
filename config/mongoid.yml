@@ -1,7 +1,7 @@
 development:
   sessions:
     default:
-      database: app27978882
+      database: app27978882 
       hosts:
         - localhost:27017
   options:
@@ -21,3 +21,4 @@ production:
     default:
       uri: <%= ENV['MONGOHQ_URL'] %>
 
+#neuron_korea
