@@ -104,6 +104,8 @@ GEM
     fssm (0.2.10)
     haml (4.0.5)
       tilt
+    heroku-api (0.3.12)
+      excon (~> 0.23.0)
     highline (1.6.21)
     hike (1.2.3)
     httparty (0.11.0)
@@ -120,6 +122,9 @@ GEM
       activesupport (>= 3.0.0)
     locomotive-aloha-rails (0.23.2.2)
       actionpack (~> 3.2.13)
+    locomotive-heroku (0.1.0)
+      heroku-api (~> 0.3.12)
+      rails (~> 3.2.13)
     locomotive-tinymce-rails (3.5.8.2)
       actionpack (~> 3.2)
     locomotive_cms (2.4.1)
@@ -264,6 +269,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
   compass-rails (~> 1.0.2)
+  locomotive-heroku (~> 0.1.0)
   locomotive_cms (~> 2.4.1)
   proxylocal
   rails (= 3.2.16)

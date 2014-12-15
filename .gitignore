@@ -13,3 +13,4 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+/neuron-math_dump_28_11_2014
