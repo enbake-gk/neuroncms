@@ -1,7 +1,7 @@
 development:
   sessions:
     default:
-      database: app27978882
+      database: neuron_texting
       hosts:
         - localhost:27017
   options:

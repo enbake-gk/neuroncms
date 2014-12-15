@@ -18,7 +18,7 @@ group :assets do
 end
 
 gem 'locomotive_cms', '~> 2.4.1', :require => 'locomotive/engine'
-
+gem 'proxylocal', group: [:development, :test]
 
 
 # To use ActiveModel has_secure_password
