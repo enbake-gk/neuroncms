@@ -12,8 +12,11 @@ AcmeCms::Application.routes.draw do
       get 'search' => 'search#search_by_name'
       get ':model/entries/:id' => 'search#nested'
       get ':model/entries' => 'search#nested'
+      get 'content_types/:slug/entries/:id/delete' => "search#custome_content_entry_delete"
     end
   end
+
+  match '/locomotive/api/content_types/:slug/entries/:id'  => 'locomotive/api/content_entries#update', via: [:post,:put]
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:

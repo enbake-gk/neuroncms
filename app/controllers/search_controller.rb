@@ -80,5 +80,19 @@ class SearchController < Locomotive::Api::BaseController
 		end
 	end
 
+   def custome_content_entry_delete
+   	@entries =  Locomotive::ContentEntry.where({ :id => params[:id]})
+    if @entries.present?
+    	@entries.destroy
+    	@entries = "#{params[:slug]} deleted successfully  "
+    else
+      	@entries = "#{params[:slug]} with id #{params[:id]} doesnot exists  "
+    end	 
+   	 	respond_to do |format|
+	     format.json { render json: @entries  }
+	    end
+   end
+	
+
 end
 
