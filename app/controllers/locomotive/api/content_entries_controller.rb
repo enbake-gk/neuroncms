@@ -9,7 +9,7 @@ module Locomotive
         find_by:              :find_by_id_or_permalink
       })
 
-      # before_filter :find_file_in_model, only: [:create, :update]
+      before_filter :find_file_in_model, only: [:update] #:create,
 
       def index
         @content_entries = @content_entries.order_by([get_content_type.order_by_definition])
