@@ -27,9 +27,9 @@ module Locomotive
       end
 
       def update      
-        @content_entry.from_presenter(params[:content_entry] || params[:entry])
-        @content_entry.save
-        respond_with @content_entry, location: main_app.locomotive_api_content_entries_url(@content_type.slug)
+        # @content_entry.from_presenter(params[:content_entry] || params[:entry])
+        # @content_entry.save
+        # respond_with @content_entry, location: main_app.locomotive_api_content_entries_url(@content_type.slug)
       end
 
       def destroy
