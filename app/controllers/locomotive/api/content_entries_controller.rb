@@ -9,7 +9,7 @@ module Locomotive
         find_by:              :find_by_id_or_permalink
       })
 
-      before_filter :find_file_in_model, only: [:update] #:create,
+      before_filter :find_file_in_model, only: [:update] #create
 
       def index
         @content_entries = @content_entries.order_by([get_content_type.order_by_definition])
@@ -91,7 +91,7 @@ module Locomotive
           temp_img_file << image_data_binary
           temp_img_file.rewind
 
-          img_params = {:filename => "data-uri-img.#{image_data[:extension]}", :type => image_data[:type], :tempfile => temp_img_file}
+          img_params = {:filename => "data-uri-img-#{rand(1000000)}.#{image_data[:extension]}", :type => image_data[:type], :tempfile => temp_img_file}
           uploaded_file = ActionDispatch::Http::UploadedFile.new(img_params)
         end
 
