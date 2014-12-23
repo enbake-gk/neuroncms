@@ -9,7 +9,7 @@ module Locomotive
         find_by:              :find_by_id_or_permalink
       })
 
-      before_filter :find_file_in_model, only: [:update] #create
+      before_filter :find_file_in_model, only: [:create, :update]
 
       def index
         @content_entries = @content_entries.order_by([get_content_type.order_by_definition])
@@ -21,12 +21,12 @@ module Locomotive
       end
 
       def create
-        @content_entry.from_presenter(params[:content_entry] || params[:entry])
-        @content_entry.save
-        respond_with @content_entry, location: main_app.locomotive_api_content_entries_url(@content_type.slug)
+        # @content_entry.from_presenter(params[:content_entry] || params[:entry])
+        # @content_entry.save
+        # respond_with @content_entry, location: main_app.locomotive_api_content_entries_url(@content_type.slug)
       end
 
-      def update      
+      def update
         # @content_entry.from_presenter(params[:content_entry] || params[:entry])
         # @content_entry.save
         # respond_with @content_entry, location: main_app.locomotive_api_content_entries_url(@content_type.slug)
@@ -44,13 +44,12 @@ module Locomotive
         ### Start ###
              @locomotive_model = Locomotive::ContentType.where(slug: params[:slug]).first
             if params[:id].present?
-               @entries = Locomotive::ContentEntry.where({ :id => params[:id]})
+               @entries = Locomotive::ContentEntry.where({ :id => params[:id]}).first
             else
-               @entries = @locomotive_model.entries
+               @entries = @locomotive_model.entries.build()
             end
            # iterate each entries
-           @entries.each do |entries|
-                entries["custom_fields_recipe"]["rules"].each do |recipe|
+                @entries["custom_fields_recipe"]["rules"].each do |recipe|
                   recipe.each_pair do |k, v|
                     # Replace params file(Base64) with originl file
                     if(v == "file")       
@@ -58,7 +57,6 @@ module Locomotive
                     end
                   end
                 end
-            end
           ### End ###
 
         @content_entry.from_presenter(params[:content_entry] || params[:entry])
@@ -91,15 +89,11 @@ module Locomotive
           temp_img_file << image_data_binary
           temp_img_file.rewind
 
-          img_params = {:filename => "data-uri-img-#{rand(1000000)}.#{image_data[:extension]}", :type => image_data[:type], :tempfile => temp_img_file}
+          img_params = {:filename => "data-uri-img-#{DateTime.now.strftime('%Q').to_i}.#{image_data[:extension]}", :type => image_data[:type], :tempfile => temp_img_file}
           uploaded_file = ActionDispatch::Http::UploadedFile.new(img_params)
         end
-
-
         return uploaded_file    
       end
-
-
       def get_content_type
         @content_type ||= current_site.content_types.where(slug: params[:slug]).first
       end
