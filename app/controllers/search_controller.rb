@@ -12,11 +12,9 @@ class SearchController < Locomotive::Api::BaseController
 		@Locomotive_Model = Locomotive::ContentType.where({ name: /^.*#{model}.*$/i } ).first 
 	    if @Locomotive_Model.present?
 	    	@column.each do |col|
-	    		##this is column name for the search
-	    		@col = col[0] 
+	    		@col = col[0] ##this is column name for the search
 					col.each do |val|
-						## this is column value for the search
-						@val = val
+						@val = val ## this is column value for the search
 			  	end
 			  	@entries = @Locomotive_Model.entries.where({"#{@col.downcase}" => /^.*#{@val}.*$/i})	
 			  end
