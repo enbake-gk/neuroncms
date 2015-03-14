@@ -2,22 +2,28 @@ class SearchController < Locomotive::Api::BaseController
 
 	def search_by_name
 		model = params[:model]
-		column = params[:column]
-		value = params[:value]
-		
-		unless column.present?
-			column = 'name'
-		end
+		@column = params[:column].to_a ##converting hash into array
+
+		# unless column.present?
+		# 	column = 'name'
+		# end
 
 		begin
-		@Locomotive_Model = Locomotive::ContentType.where({ name: /^.*#{model}.*$/i } ).first  
-		    if @Locomotive_Model.present?
-		    	@entries = @Locomotive_Model.entries.where({"#{column.downcase}" => /^.*#{value}.*$/i})
-		    end
+		@Locomotive_Model = Locomotive::ContentType.where({ name: /^.*#{model}.*$/i } ).first 
+	    if @Locomotive_Model.present?
+	    	@column.each do |col|
+	    		##this is column name for the search
+	    		@col = col[0] 
+					col.each do |val|
+						## this is column value for the search
+						@val = val
+			  	end
+			  	@entries = @Locomotive_Model.entries.where({"#{@col.downcase}" => /^.*#{@val}.*$/i})	
+			  end
+		  end
 		rescue
-		    puts 'Invalid Request! Please check and try again'
+		  puts 'Invalid Request! Please check and try again'
 		end
-	  	
 	  	respond_to do |format|
 	     format.json { render json: @entries  }
 	    end
