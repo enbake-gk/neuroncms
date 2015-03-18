@@ -18,7 +18,8 @@ class SearchController < Locomotive::Api::BaseController
 						## this is column value for the search
 						@val = val
 			  	end
-			  	@entries = @Locomotive_Model.entries.where({"#{@col.downcase}" => /^.*#{@val}.*$/i})	
+			  	# @entries = @Locomotive_Model.entries.where({"#{@col.downcase}" => /^.*#{@val}.*$/i})	
+			  	@entries = @Locomotive_Model.entries.where({@col.downcase.downcase => @val})	
 			  end
 		  end
 		rescue
