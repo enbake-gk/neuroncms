@@ -3,7 +3,7 @@ class SearchController < Locomotive::Api::BaseController
 	def search_by_name
 		model = params[:model]
 		@column = params[:column]
-		debugger
+		
 		begin
 		@Locomotive_Model = Locomotive::ContentType.where({ name: /^.*#{model}.*$/i } ).first 
 			if @Locomotive_Model.present?
