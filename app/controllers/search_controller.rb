@@ -3,7 +3,7 @@ class SearchController < Locomotive::Api::BaseController
 	def search_by_name
 		model = params[:model]
 		@column = params[:column]
-		
+
 		begin
 		@Locomotive_Model = Locomotive::ContentType.where({ name: /^.*#{model}.*$/i } ).first 
 			if @Locomotive_Model.present?
@@ -16,7 +16,6 @@ class SearchController < Locomotive::Api::BaseController
 		rescue
 			puts 'Invalid Request! Please check and try again'
 		end
-
 		respond_to do |format|
 		 format.json { render json: @entries  }
 		end
