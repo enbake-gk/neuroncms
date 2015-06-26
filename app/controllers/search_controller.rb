@@ -2,13 +2,40 @@ class SearchController < Locomotive::Api::BaseController
 
 	def search_by_name
 		model = params[:model]
-		@column = params[:column]
+		column = params[:column]
+		limit = params[:limit]
+		offset = params[:offset]
+		compare = params[:compare]
+		order = params[:order]
 
 		begin
-		@Locomotive_Model = Locomotive::ContentType.where({ name: /^.*#{model}.*$/i } ).first 
-			if @Locomotive_Model.present?
-				if @column.present?
-					@entries = @Locomotive_Model.entries.where(@column)	
+		@locomotive_model = Locomotive::ContentType.where({ name: /^.*#{model}.*$/i } ).first
+			if @locomotive_model.present?
+
+				if ((compare.present? ) || (column.present?))
+					@entries = @locomotive_model.entries
+					
+                    @entries = @entries.where(column)	if column.present?
+
+
+					# Query modification if datetime comparision
+                   if compare.present?
+                   	compare_chng = compare.first.first.split('.') #["created_at", "lte"]
+                   	compare_sym = compare_chng[0].to_sym #:created_at
+                   	term = compare_chng[1].to_s #"lte"
+                    time = Time.parse(compare.values.to_s) #2015-01-01 10:05:00 +0530
+                   	query = {compare_sym.send(term) => time}
+                   	@entries = @entries.where(query)
+                   end
+
+                   @entries = @entries.order_by(order) if order.present?
+
+					# appent limit if it in in params
+                    @entries = @entries.limit(limit) if limit.present?
+                    
+                    # appent offset if it in in params
+                    @entries = @entries.offset(offset) if offset.present?
+
 				else
 					@entries = "Search result not found!"
 				end
@@ -90,7 +117,5 @@ class SearchController < Locomotive::Api::BaseController
 			 format.json { render json: @entries  }
 			end
 	 end
-	
-
 end
 
