@@ -3,17 +3,17 @@ Locomotive.configure do |config|
   # A single locomotiveCMS instance can serve one single site or many.
   # If you want to run many different websites, you will have to specify
   # your own domain name (ex: locomotivehosting.com).
-
+  #
   # Ex:
-
-  config.multi_sites do |multi_sites|
-    # each new website you add will have a default entry based on a subdomain
-    # and the multi_site_domain value (ex: website_1.locomotivehosting.com).
-    multi_sites.domain = 'example.neuron-rescue.herokuapp.com' #'myhostingplatform.com'
-    # define the reserved subdomains
-    # Ex:
-    multi_sites.reserved_subdomains = %w(www admin email blog webmail mail support help site sites)
-  end
+  # config.multi_sites do |multi_sites|
+  #   # each new website you add will have a default entry based on a subdomain
+  #   # and the multi_site_domain value (ex: website_1.locomotivehosting.com).
+  #   multi_sites.domain = 'example.com' #'myhostingplatform.com'
+  #
+  #   # define the reserved subdomains
+  #   # Ex:
+  #   multi_sites.reserved_subdomains = %w(www admin email blog webmail mail support help site sites)
+  # end
   config.multi_sites = false
 
   # configure how many items we display in sub menu in the "Contents" section.
@@ -23,11 +23,11 @@ Locomotive.configure do |config|
   #   per_page:           10
   # }
 
-  # default locale (for now, only en, de, fr, pl, pt-BR, it, nb, ja, zh-CN, cs and bg are supported)
+  # default locale (for now, only en, de, fr, pl, pt, pt-BR, it, nb, ja, zh-CN, cs, bg and sk are supported)
   config.default_locale = :en
 
   # available locales suggested to "localize" a site. You will have to pick up at least one among that list.
-  # config.site_locales = %w{en de fr pl pt-BR it nl nb es ru ja zh-CN cs bg}
+  # config.site_locales = %w{en de fr pl pt pt-BR it nl nb es ru ja zh-CN cs bg sk sr}
 
   # tell if logs are enabled. Useful for debug purpose.
   config.enable_logs = true
@@ -60,6 +60,15 @@ Locomotive.configure do |config|
   #
   # config.csrf_protection = true
 
+  # Add the checksum of a theme asset at the end of its path to allow public caching.
+  # By default, it's disabled.
+  #
+  # config.theme_assets_checksum = true
+
+  # Enable serving of images, stylesheets, and JavaScripts from an asset server
+  # config.asset_host = 'http://assets.example.com'
+  # config.asset_host = -> (request, site) { ... }
+
   # Rack-cache settings, mainly used for the inline resizing image module. Default options:
   # config.rack_cache = {
   #   verbose:     true,
@@ -70,10 +79,5 @@ Locomotive.configure do |config|
   # config.rack_cache = false
   #
   # Note: by default, rack/cache is disabled in the Heroku platform
-config.hosting = {
-  :target     => :heroku,
-  :api_key    => ENV['HEROKU_API_KEY'],
-  :app_name   => ENV['HEROKU_APP_NAME']
-}
 
 end

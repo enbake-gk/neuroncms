@@ -1,21 +1,24 @@
 require 'dragonfly'
 
-## initialize Dragonfly ##
+# Configure
+Dragonfly.app.configure do
+  plugin :imagemagick,
+    convert_command:  `which convert`.strip.presence || '/usr/local/bin/convert',
+    identify_command: `which identify`.strip.presence || '/usr/local/bin/identify'
 
-app = Dragonfly[:images]
-app.configure_with(:rails)
-app.configure_with(:imagemagick)
+  verify_urls true
 
-## configure it ##
+  secret '784852d8daf8f976c697acaee4f8f66ec5030dc04161e4b76ce2b144c5c9cfa4'
 
-Dragonfly[:images].configure do |c|
-  # Convert absolute location needs to be specified
-  # to avoid issues with Phusion Passenger not using $PATH
-  c.convert_command  = `which convert`.strip.presence || "/usr/local/bin/convert"
-  c.identify_command = `which identify`.strip.presence || "/usr/local/bin/identify"
+  url_format '/images/dynamic/:job/:basename.:ext'
 
-  c.allow_fetch_url  = true
-  c.allow_fetch_file = true
+  fetch_file_whitelist /public/
 
-  c.url_format = '/images/dynamic/:job/:basename.:format'
+  fetch_url_whitelist /.+/
 end
+
+# Logger
+Dragonfly.logger = Rails.logger
+
+# Mount as middleware
+Rails.application.middleware.use Dragonfly::Middleware

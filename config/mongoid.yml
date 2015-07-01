@@ -1,7 +1,7 @@
 development:
   sessions:
     default:
-      database: neuron_texting
+      database: neuron_math_26_06_15_server
       hosts:
         - localhost:27017
   options:
@@ -10,7 +10,7 @@ development:
 test:
   sessions:
     default:
-      database: acme_cms_test
+      database: locomotive_test
       hosts:
         - localhost:27017
   options:
@@ -19,5 +19,10 @@ test:
 production:
   sessions:
     default:
-      uri: <%= ENV['MONGOHQ_URL'] %>
-
+      database: neuron_math_26_06_15_server
+      # heroku
+      # uri: <%= ENV['MONGOHQ_URL'] %>
+      hosts:
+        - localhost:27017
+  options:
+    identity_map_enabled: true
