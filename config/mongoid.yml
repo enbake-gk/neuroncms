@@ -1,11 +1,14 @@
 development:
   sessions:
     default:
-      database: neuron_math_26_06_15_server
+      database: neuron_math_02_07_15_server_evening
       hosts:
         - localhost:27017
   options:
     identity_map_enabled: true
+
+    # database: neuron_math_26_06_15_server # search working tested
+    # neuron_math_02_07_15_server_evening # not working
 
 test:
   sessions:
@@ -19,5 +22,13 @@ test:
 production:
   sessions:
     default:
-      uri: <%= ENV['MONGOHQ_URL'] %>
+      uri: <%= ENV['MONGOLAB_URI'] %>
 
+# production:
+#   sessions:
+#     default:
+#       database: neuron_math_02_07_15_server_evening
+#       hosts:
+#         - localhost:27017
+#   options:
+#     identity_map_enabled: true
