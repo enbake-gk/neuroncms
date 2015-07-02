@@ -5,15 +5,15 @@ Locomotive.configure do |config|
   # your own domain name (ex: locomotivehosting.com).
   #
   # Ex:
-  # config.multi_sites do |multi_sites|
-  #   # each new website you add will have a default entry based on a subdomain
-  #   # and the multi_site_domain value (ex: website_1.locomotivehosting.com).
-  #   multi_sites.domain = 'example.com' #'myhostingplatform.com'
-  #
-  #   # define the reserved subdomains
-  #   # Ex:
-  #   multi_sites.reserved_subdomains = %w(www admin email blog webmail mail support help site sites)
-  # end
+  config.multi_sites do |multi_sites|
+    # each new website you add will have a default entry based on a subdomain
+    # and the multi_site_domain value (ex: website_1.locomotivehosting.com).
+    multi_sites.domain = 'example.neuron-rescue.herokuapp.com' #'myhostingplatform.com'
+  
+    # define the reserved subdomains
+    # Ex:
+    multi_sites.reserved_subdomains = %w(www admin email blog webmail mail support help site sites)
+  end
   config.multi_sites = false
 
   # configure how many items we display in sub menu in the "Contents" section.
@@ -79,5 +79,11 @@ Locomotive.configure do |config|
   # config.rack_cache = false
   #
   # Note: by default, rack/cache is disabled in the Heroku platform
+
+  config.hosting = {
+  :target     => :heroku,
+  :api_key    => ENV['HEROKU_API_KEY'],
+  :app_name   => ENV['HEROKU_APP_NAME']
+}
 
 end
