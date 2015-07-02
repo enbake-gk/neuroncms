@@ -14,7 +14,7 @@ group :assets do
   gem 'sass-rails',     '~> 3.2.6'
   gem 'coffee-rails',   '~> 3.2.2'
   gem 'uglifier',       '~> 2.5.1'
-  gem 'therubyracer', :platforms => :ruby
+  # gem 'therubyracer', :platforms => :ruby
 end
 
 # Use unicorn as the app server
