@@ -18,27 +18,3 @@ end
 
 # Use unicorn as the app server
 gem 'unicorn'
-
-User.find_each do |user|
-  user.save!(validate: false)
-end
-
-Locomotive::ContentType.where({ name: /^.*visitors.*$/i } ).first.entries.each do |user|
- user.save!
-end
-
-
-
-Locomotive::ContentType.where({ name: /^.*visitors.*$/i } ).first.entries.count
-
-
-
-enbake17062014
-
-
-localhost:3000/locomotive/api/search.json?auth_token=MyTAppqWJ1cdx9odKfiK&model=visitors&column[first_name]=LIAM&order[created_at]=desc&limit=100
-
-
-Master::Studio.where(:code => 'lauren').first
-
-{:studio_key=>"lauren", :job_id=>1027, :client_group_id=>663, :image_ids=>[1002370541, 1002370540, 1002370543, 1002370615, 1002370711, 1002370751, 1002370392], :csv_filename=>"/home/enbake/workspace/backdrop-proof/tmp/20150630-121425-7518.csv", :low_res=>false}
