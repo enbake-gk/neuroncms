@@ -37,8 +37,8 @@ AcmeCms::Application.configure do
       address:              'smtp.gmail.com',
       port:                 587,
       domain:               'localhost:3000',
-      user_name:            'gwretailer@gmail.com',
-      password:             'Npass@2015',
+      user_name:            'dummy09807@gmail.com',
+      password:             'dummy112233',
       authentication:       'plain',
       enable_starttls_auto: true  
   }
