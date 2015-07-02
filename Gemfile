@@ -18,3 +18,6 @@ end
 
 # Use unicorn as the app server
 gem 'unicorn'
+
+gem 'locomotive-heroku', '~> 0.1.0', :require => 'locomotive/heroku'
+gem 'thin', :group => 'production'
