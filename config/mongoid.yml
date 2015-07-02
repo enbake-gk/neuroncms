@@ -19,10 +19,5 @@ test:
 production:
   sessions:
     default:
-      database: neuron_math_26_06_15_server
-      # heroku
       # uri: <%= ENV['MONGOHQ_URL'] %>
-      hosts:
-        - localhost:27017
-  options:
-    identity_map_enabled: true
+
